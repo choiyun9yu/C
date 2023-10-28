@@ -246,7 +246,7 @@ C언어에서는 -1로 표현되지만, 파일에서 데이터를 읽을 때, EO
 
 ## 5. 배열
 
-### 5-1. 배열의 특징과 선언 바업
+### 5-1. 배열의 특징과 선언 방법
 
 ### 5-2. 배열의 차원
 
@@ -273,25 +273,75 @@ C언어에서는 -1로 표현되지만, 파일에서 데이터를 읽을 때, EO
 
 ### 6-1. 나만의 함수 만들기
 
-### 6-2. 함수의 반환 값
+    // 반환값이 없는 경우 함수형을 void로 한다.
+    void 1_plus_2(){
+        printf("%d", 1+2);
+        return;
+    }
+
+    int main() {
+        1_plus_2();
+    }
 
 ### 6-2. 선언과 정의
 
+    int add(int a, int b){
+        return a+b;
+    }
+
+    int main() {
+        add(1, 2);
+        return 0;
+    }
+
+위와 같이 선언과 정의가 동시에 되어 있으면 main함수를 보기 어려워진다. 따라서 위에서 함수를 선언만 해두고 함수는 밑에서 따로 정의하기도 한다.
+
+    int add(int a, intb);
+
+    int main() {
+        add(1, 2);
+        return 0;
+    }
+
+    int add(int a, int b) {
+        return a+b;
+    }
+
+
 ### 6-3. 매개변수
+함수에 매개변수로 배열을 입력하는 경우 배열의 길이는 비워둔다. 단, 다차원 배열의 경우 첫번째 배열만 비워두고 2번째, 3번째 부분은 정확히 채워야한다.
 
-### 6-4. 함수의 작동 방법
+    int ArrSum(int array[]);
+    int ArrXArrSum(int array[][10]);
 
-### 6-5. 재귀함수
+### 6-4. 재귀함수
 
 #### 재귀함수의 특징과 선언 방법
+재귀 함수는 return을 활용해 처음으로 돌아가는 무한루프 함수이다. 
 
-#### 재귀함수와 반복문의 공통점과 특징
+    // 팩토리얼
+    int factorial (int n) {
+        if (n == 1) return 1;
+        return n * factorial(n-1);
+    }
 
 ### 6-6. 재귀함수의 활용
 
 #### 유클리드 호제법(2)
 
+    int gcd(int a, int b) {
+        if (b == 0) return a;
+        return gcd(b, a % b);
+    }
+
+
 #### 피보나치 수열
+![img_5.png](img_5.png)
+
+    int fibo(int n) {
+        if (n <= 2) return 1;
+        return fibo(b-1) + fibo(n-2);
+    }
 
 <br>
 <br>
