@@ -40,10 +40,10 @@ C언어로 작성된 프로그램은 main()함수부터 시작하게 된다. 만
     char C = 65;            // C는 문자형 변수이고, 값은 'A'이다. (아스키코드 상의 값)
     char s[6] = "Korea";    // s는 문자열이고, 값은 {K, o, r, e, a, NULL}이다. 
 
-![img.png](img.png)
+![img.png](img/img.png)
 
 ### 1-5. 변수의 형태
-![img.png](img_0.png)
+![img.png](img/img_0.png)
 
 - int: (-21억 ~ +21억)
 - unsigned int: (1 ~ 42억)
@@ -82,8 +82,8 @@ C언어로 작성된 프로그램은 main()함수부터 시작하게 된다. 만
     printf("%s", "hello")   출력 >> hello
     printf("5%%");          출력 >> 5%
 
-![img.png](img_2.png)
-![img_1.png](img_3.png)
+![img.png](img/img_2.png)
+![img_1.png](img/img_3.png)
 
 ### 2-3. 입력 함수 : scanf
 
@@ -392,7 +392,7 @@ C언어에서는 -1로 표현되지만, 파일에서 데이터를 읽을 때, EO
 
 
 #### 피보나치 수열
-![img_5.png](img_5.png)
+![img_5.png](img/img_5.png)
 
     int fibo(int n) {
         if (n <= 2) return 1;
@@ -406,9 +406,39 @@ C언어에서는 -1로 표현되지만, 파일에서 데이터를 읽을 때, EO
 
 ### 7-1. 포인터 변수와 주소값; 참조와 역참조
 
+    // 포인터 변수 선언
+    int *p;         // 아스터리스크(*)는 이 변수가 포인터라는 것을 의미한다. 
+    
+    int a, *pa;     // 변수 a와 포인터 pa를 선언한다.
+    pa = &a;        // &기호는 '참조 연산자'(주소 연산자)이다. &a는 변수 a의 주소값을 의미한다.
+    *pa = 100;      // 이때의 아스터리스크(*)는 '역참조 연산자'이다. *pa는 pa가 가지고 있는 주소값에 *를 붙이게 되면 그 변수의 값의 값을 의미한다. 
+    printf("%d", a);    >> 100
+
 ### 7-2. 포인터와 함수; Call by Reference
 
+    int add(int *x, int *y) {   // 매개 변수가 포인터가 되어 함수가 작동할 때 a,b의 실인수값이 바뀌게 된다.
+        *x += *y;
+        return *x;
+    }    
+
+    int main() {
+        int a = 5, b = 5;
+        printf("%d %d", add(a, b), a);  >> 10 10
+    }
+
 ### 7-3. 구조체 포인터; 포인터 연산자
+
+    typedef struct {
+        int rotation;
+        double r;
+    }circle;
+
+    int main() {
+        circle c = {10, 3};
+        circle *pc = c;
+        (*pc).rotation = 12;    // (*pc)는 *가 역참조 연산자임을 강조하기 위한 것
+        pc->rotation = 10;      // 화살표(->)는 위의 괄호를 쓰기 귀찮아서 만든 구조체 포인터 연산자
+    }
 
 <br>
 <br>
@@ -416,7 +446,37 @@ C언어에서는 -1로 표현되지만, 파일에서 데이터를 읽을 때, EO
 ## 8. 구조체
 
 #### 구조체의 뜻과 종류; struct와 typedef struct
+구조체는 직접 변수의 형태를 만들 수 있게 해준다. 구조체에는 struct와 typedef struct 2가지가 있다.
+
+    struct student_info{
+        int number;
+        char name[20];
+        int age;
+    }
+    
+    int main(){
+        struct student_info s = {1, "Hong gill dong". 12};
+        s.number = 10;  // s 구조체 안에 있는 number를 지칭하여 수정
+    }
+######
+    typedef struct {
+        int num;
+        char grade;
+    }student;       // typedef struct는 구조체 이름이 중괄호 뒤에 위치한다.
+
+    int main(){
+        student s = {1, 'A'};   // typedef struct는 변수 앞에 struct라고 명시하지 않아도 된다.(구조체 이름은 명시)
+    }
 
 #### 포인터 구조체
+포인터 구조체는 구조체 안에 퐁니터를 넣어서 만든 구조체이다.
 
-#### 연결 리스트
+    typedef struct {
+        int *data;
+        Node *link; // 자기참조 구조체
+    }Node;
+
+    int main(){
+        Node list;
+        list.data = 123456789 * 63  // 
+    }
